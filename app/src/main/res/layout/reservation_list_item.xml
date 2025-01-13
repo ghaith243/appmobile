@@ -71,20 +71,30 @@
             android:ellipsize="end"
             android:maxLines="1" />
 
-
-
-        <!-- Delete Icon -->
-        <ImageButton
-            android:id="@+id/deleteIcon"
-            android:layout_width="wrap_content"
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:src="@android:drawable/ic_delete"
-            android:contentDescription="Delete Reservation"
-            android:background="?android:attr/selectableItemBackground"
-            android:layout_marginStart="16dp"
-            android:layout_gravity="end"
-            android:importantForAccessibility="yes"
-            android:accessibilityLiveRegion="assertive"/>
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/buttonUpdate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Update"
+                android:backgroundTint="#2196F3"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delete"
+                android:backgroundTint="#F44336"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

@@ -93,10 +93,26 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.rawQuery(query, null); // Return all reservations
     }
 
+    public Cursor getReservationById(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_RESERVATIONS, null, COLUMN_ID + "=?", new String[]{String.valueOf(id)}, null, null, null);
+    }
+
     public boolean deleteReservation(int reservationId) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsAffected = db.delete("reservations", "id = ?", new String[]{String.valueOf(reservationId)});
         db.close();
+        return rowsAffected > 0;
+    }
+
+    public boolean updateReservation(int id, String guestName, String checkInDate, String checkOutDate) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("guestName", guestName);
+        contentValues.put("checkInDate", checkInDate);
+        contentValues.put("checkOutDate", checkOutDate);
+
+        int rowsAffected = db.update("reservations", contentValues, "id=?", new String[]{String.valueOf(id)});
         return rowsAffected > 0;
     }
 }

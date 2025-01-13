@@ -1,54 +1,55 @@
 package hotel.review.appandroid;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.BaseAdapter;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
-import java.util.List;
+import hotel.review.appandroid.R;
 
-public class ReservationAdapter extends RecyclerView.Adapter<ReservationAdapter.ViewHolder> {
+public class ReservationAdapter extends BaseAdapter {
 
-    private List<String> reservations;
-    private OnItemClickListener onItemClickListener;
+    private final ArrayList<String> reservationList;
+    private final ArrayList<Integer> reservationIds;
+    private final Context context;
 
-    public interface OnItemClickListener {
-        void onItemClick(int position);
-    }
-
-    public ReservationAdapter(List<String> reservations, OnItemClickListener listener) {
-        this.reservations = reservations;
-        this.onItemClickListener = listener;
-    }
-
-    @NonNull
-    @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
-        return new ViewHolder(view);
+    public ReservationAdapter(Context context, ArrayList<String> reservationList,
+                              ArrayList<Integer> reservationIds) {
+        this.context = context;
+        this.reservationList = reservationList;
+        this.reservationIds = reservationIds;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.textView.setText(reservations.get(position));
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position));
+    public int getCount() {
+        return reservationList.size();
     }
 
     @Override
-    public int getItemCount() {
-        return reservations.size();
+    public Object getItem(int position) {
+        return reservationList.get(position);
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+    @Override
+    public long getItemId(int position) {
+        return reservationIds.get(position);
+    }
 
-        ViewHolder(View view) {
-            super(view);
-            textView = view.findViewById(android.R.id.text1);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.reservation_list_item, parent, false);
         }
+
+        TextView reservationDetails = convertView.findViewById(R.id.reservationsTitle);
+        String reservationDetail = reservationList.get(position);
+        reservationDetails.setText(reservationDetail);
+
+        return convertView;
     }
 }

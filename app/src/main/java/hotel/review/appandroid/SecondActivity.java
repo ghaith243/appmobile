@@ -104,6 +104,22 @@ public class SecondActivity extends AppCompatActivity {
                 startActivity(intent, options.toBundle());
             }
         });
+
+        more_details.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(SecondActivity.this, ThirdActivity.class);
+
+                // Create a shared element transition for the header background
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(second_arrow_up, "background_image_transition");
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(SecondActivity.this, pairs);
+
+                startActivity(intent, options.toBundle());
+            }
+        });
     }
 }
 
