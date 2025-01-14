@@ -78,23 +78,6 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <Button
-                android:id="@+id/buttonUpdate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Update"
-                android:backgroundTint="#2196F3"
-                android:textColor="#FFFFFF" />
-
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Delete"
-                android:backgroundTint="#F44336"
-                android:textColor="#FFFFFF" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

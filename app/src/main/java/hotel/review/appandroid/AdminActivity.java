@@ -3,13 +3,10 @@ package hotel.review.appandroid;
 import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -38,8 +35,8 @@ public class AdminActivity extends AppCompatActivity {
         loadReservations();
 
         listView.setOnItemClickListener((parent, view, position, id) -> {
-            // Show options dialog for the selected reservation
-            showOptionsDialog(position);
+            // Delete the selected reservation when clicked
+            deleteReservation(position);
         });
     }
 
@@ -68,19 +65,6 @@ public class AdminActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    private void showOptionsDialog(int position) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose an option")
-                .setItems(new String[]{"Update", "Delete"}, (dialog, which) -> {
-                    if (which == 0) {
-                        updateReservation(position); // Update reservation
-                    } else if (which == 1) {
-                        deleteReservation(position); // Delete reservation
-                    }
-                })
-                .show();
-    }
-
     private void deleteReservation(int position) {
         int reservationId = reservationIds.get(position);
         boolean isDeleted = dbHelper.deleteReservation(reservationId);  // Delete reservation from the database
@@ -91,9 +75,5 @@ public class AdminActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Failed to delete reservation", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private void updateReservation(int position) {
-        // Your update reservation code here (as explained before)
     }
 }
